@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async GET request to CoinGecko API</title>
+    
+    
+    <script src='jquery-3.2.1.min.js'></script>
+    <!-- <script src='http://code.jquery.com/jquery-3.2.1.min.js'></script>  -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <div id='West'>
+        <button id='USD'>USD</button>
+        <button id='CAD'>CAD</button>
+        <button id='EUR'>EUR</button>
+    </div>
+    
+    <div class="West" id="USDboard">
+        <h1>CoinGecko API GET Request to see crypto data using jQuery with prices in USD</h1>
+        <table id="tableUSD">
+        </table>
+    </div>
+
+
+    <div class="West" id="CADboard">
+        <h1>CurrencyScoop API for Cryptocurrency prices in CAD</h1>
+        <table id="tableCAD">
+        </table>
+    </div>
+
+    <div class="West" id="EURboard">
+        <h1>CurrencyScoop API for Cryptocurrency prices in EUR</h1>
+        <table id="tableEUR">
+        </table>
+    </div>
+
+    <div id='Africa'>
+        <button id='DZD'>DZD</button>
+        <button id='TND'>TND</button>
+        <button id='MAD'>MAD</button>
+    </div>
+
+    <div id="DZDboard">
+        <h1>CurrencyScoop API for Cryptocurrency prices in DZD</h1>
+        <table id="tableDZD">
+        </table>
+    </div>
+
+
+    <div id="TNDboard">
+        <h1>CurrencyScoop API for Cryptocurrency prices in TND</h1>
+        <table id="tableTND">
+        </table>
+    </div>
+
+    <div id="MADboard">
+        <h1>CurrencyScoop API for Cryptocurrency prices in MAD</h1>
+        <table id="tableMAD">
+        </table>
+    </div>
+
+    <script src="scriptAPI4.js"></script>
+    <script src='tabs.js'></script>
+</body>
+</html>
