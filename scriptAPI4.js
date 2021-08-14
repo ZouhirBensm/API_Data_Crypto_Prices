@@ -1,27 +1,35 @@
 $.getScript('functions.js');
 
-let CGjson; //CoinGecko array of cryptocurrency objects
-let CSallCurency; // All of CoinScoop currency conversion rates in a object
+endpoint = 'v1/latest'
+api_key = 'f93abd7bacc99100afb795ee4043649b';
+
 var table;
 real();
 //real();
 
 function real(){
     $('table').empty()
-    $.get('urlget2.php', function(CurrencyScoop) {
-        setTimeout(console.log('Fetching currency conversion coeficients...'), 100);
-        $.get('urlget1.php', function(CoinGecko) {
-            returnedCurrencyObj = funcCurrencyObj(CurrencyScoop);
-            console.log(returnedCurrencyObj);
 
+    
+    apiCoinGecko(function(CoinGecko){
+        //console.log('CoinGecko getting!')
+        
+        apiCurrencyScoop(function(CurrencyScoop){
+            //console.log('CurrencyScoop getting!');
+            //console.log(CurrencyScoop)
+            returnedCurrencyObj = funcCurrencyObj(CurrencyScoop);
+            //console.log(returnedCurrencyObj);
+            //console.log(CoinGecko)
             for(const property in returnedCurrencyObj){
                 buildAndOut(CoinGecko, returnedCurrencyObj[property], property);
                 //console.log(typeof property, property);
             }
-
         })
-        
     })
+
+
+
+
 }
 
 handle = setInterval(real, 1000*60*5) //If GET request works out it will start the interval
@@ -32,24 +40,24 @@ setTimeout("clearInterval(handle)", 1000*60*40);
 //returns object with Currency/USD
 function funcCurrencyObj(CurrencyScoop){
     let CurrObj;
-    CSallCurency = JSON.parse(CurrencyScoop);
-    //console.log(CSallCurency.response.rates);
+    //console.log(CurrencyScoop)
+    //console.log(CurrencyScoop.response.rates);
     CurrObj = {
-        USD: CSallCurency.response.rates.USD,
-        CAD: CSallCurency.response.rates.CAD,
-        EUR: CSallCurency.response.rates.EUR,
-        DZD: CSallCurency.response.rates.DZD,
-        TND: CSallCurency.response.rates.TND,
-        MAD: CSallCurency.response.rates.MAD
+        USD: CurrencyScoop.response.rates.USD,
+        CAD: CurrencyScoop.response.rates.CAD,
+        EUR: CurrencyScoop.response.rates.EUR,
+        DZD: CurrencyScoop.response.rates.DZD,
+        TND: CurrencyScoop.response.rates.TND,
+        MAD: CurrencyScoop.response.rates.MAD
     };
     return CurrObj;
 }
 
 function buildAndOut(CoinGecko, CURconstant, property){
-    CGjson = JSON.parse(CoinGecko);
-    //console.log(CGjson);
+    
+    //console.log(CoinGecko);
 
-    CGjson.forEach(element => {
+    CoinGecko.forEach(element => {
         var tr = document.createElement('tr');
         switch (CURconstant){
             case returnedCurrencyObj.USD:
@@ -75,3 +83,36 @@ function buildAndOut(CoinGecko, CURconstant, property){
     });
 }
 
+
+function apiCurrencyScoop(handleData){
+    $.ajax({
+        url: 'https://api.currencyscoop.com/' + endpoint + '?api_key=' + api_key,
+        type: 'GET',
+    
+        dataType: 'json',
+        success: function(json) {
+    
+            // exchange rata data is stored in json.quotes
+            //console.log(json);
+            handleData(json)
+    
+        }
+    })
+}
+
+
+function apiCoinGecko(handleData){
+    $.ajax({
+        url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=10&page=1&sparkline=false',
+        type: 'GET',
+    
+        dataType: 'json',
+        success: function(json) {
+    
+            // exchange rata data is stored in json.quotes
+            //console.log(json);
+            handleData(json)
+    
+        }
+    });
+}

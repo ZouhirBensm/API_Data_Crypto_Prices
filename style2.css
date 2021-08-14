@@ -1,8 +1,79 @@
-img {
-    width: 30px;
-    height: 30px
+body {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+h1 {
+    /* width: 50vw; */
+    margin: 0;
+    font-size: 1.5rem;
+    
+}
+
+
+img {
+    width: 30px;
+    height: 30px;
+    
+}
+
+
+
+div.toogle {
+    background-color: black;
+    display: flex;
+    justify-content: space-around;  
+}
+
+
+button {
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+    color: aliceblue;
+    width: 33.33%;
+    padding: 0;
+    padding: 1rem .5rem;
+
+}
+
+
 table {
-    border: black 2px solid;
+    margin: 30px auto;
+    width: 100%;
+}
+
+tr:nth-child(even){
+    color: white;
+    background-color: black;
+    /* border-bottom: 3px solid white; */
+    /* background-color: rgb(0, 0, 0); */
+}
+
+tr > td {
+    width: 33%;
+    margin: 0 auto;
+    
+    
+}
+
+td > img {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto
+}
+
+
+
+button.mid{
+    border-left: white 5px solid;
+    border-right: white 5px solid;
+}
+
+body > div {
+    width: 60vw;
+    min-width: 300px;
 }
